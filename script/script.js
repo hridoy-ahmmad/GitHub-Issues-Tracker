@@ -79,6 +79,7 @@ const displayIssue = (issues) => {
 
     issues.forEach(issue => {
         const newDiv = document.createElement('div')
+        newDiv.className = 'mb-5'
         newDiv.innerHTML = `
         <div onclick ="loadModals(${issue.id})" class="max-w-sm bg-white border-0 border-t-4 mt-3 h-full flex flex-col justify-between rounded-xl shadow-sm overflow-hidden w-full ${issue.status === "open" ? 'border-green-500' : 'border-purple-600'} ">
                 <div class="p-5">
@@ -104,7 +105,7 @@ const displayIssue = (issues) => {
 
                     <div class="flex gap-2 mb-4">
                         <span
-                            class="inline-flex items-center gap-1 px-3 py-1  border border-red-100  text-sm font-medium rounded-full uppercase
+                            class="inline-flex items-center gap-1 px-3 py-1   text-sm font-medium rounded-full uppercase 
                             ${issue.labels[0] === 'enhancement' ? 'bg-green-50 text-green-500'
                 : 'bg-red-50 text-red-500'
             }
@@ -151,16 +152,17 @@ const loadModals = async (issueId) => {
 }
 
 const displayModals = (issue) => {
-
-    my_modal_5.innerHTML = ` 
-    
+    const newDiv = document.createElement('div')
+    my_modal_5.innerHTML = ''
+   
+    newDiv.innerHTML = ` 
     <div class="modal-box max-w-3xl">
             <div class="bg-white rounded-xl  w-full p-8 relative">
                 <h2 class="text-3xl font-bold text-slate-800 mb-2">Fix broken image uploads</h2>
                 <div class="flex items-center gap-3 mb-6">
                     <span
                         class=" text-white px-3 py-1 rounded-full text-sm font-medium flex items-center gap-1
-                        ${issue.status === "open"? 'bg-green-500': 'bg-red-500'}
+                        ${issue.status === "open" ? 'bg-green-500' : 'bg-red-500'}
                         
                         ">
                         ${issue.status}
@@ -172,27 +174,24 @@ const displayModals = (issue) => {
 
                 <div class="flex gap-2 mb-8">
                     <p
-                        class="bg-red-50 text-red-400 border border-red-100 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1 
-                         ${issue.labels[0] === 'ENHANCEMENT' ? 'bg-green-50 text-green-500'
-                : 'bg-red-50 text-red-500'
-            }
+                        class=" border  px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1 
+                         ${issue.labels[0]?.toLowerCase() === 'enhancement' ? 'bg-green-50 text-green-500'
+            : 'bg-red-50 text-red-500'
+        }
                         ">
                         ${issue.labels[0]}
                     </p>
                     <span
                         class="bg-amber-50 text-amber-500 border border-amber-100 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1
-                        ${issue.labels[1] === 'enhancement' ? 'bg-green-50 text-green-500'
-                : 'bg-orange-50 text-orange-600'
-            }
-                        
+                        ${issue.labels[1]?.toLowerCase() === 'enhancement' ? 'bg-green-50 text-green-500'
+            : 'bg-orange-50 text-orange-600'}  
                         ">
                        ${issue.labels[1] === undefined ? '-' : issue.labels[1]}
                     </span>
                 </div>
 
                 <p class="text-slate-500 text-lg leading-relaxed mb-10">
-                    The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive
-                    behavior.
+                   ${issue.description}
                 </p>
 
                 <div class="bg-slate-50 rounded-xl p-6 flex justify-between items-center mb-10">
@@ -212,14 +211,11 @@ const displayModals = (issue) => {
 
             </div>
 
-            <form method="dialog " class="flex justify-end">
-                <!-- if there is a button in form, it will close the modal -->
-                <button class="btn btn-primary">Close</button>
-            </form>
+           <form method="dialog" class="text-right">
+    <button class="btn btn-primary">Close</button>
+</form>
         </div>
     
     `
-
-
-
+    my_modal_5.append(newDiv)
 }
