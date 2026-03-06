@@ -10,6 +10,7 @@
 </head>
 
 <body class="bg-gray-100 min-h-screen">
+
     <!-- header -->
     <header class="bg-white">
         <section class="max-w-11/12 mx-auto md:flex space-y-5 md:space-y-0 justify-between py-6 ">
@@ -17,25 +18,22 @@
                 <img src="/assests/github-logo.png" class="w-9" alt="">
                 <p class="font-bold">GitHub Issues Tracker</p>
             </a>
-
             <!-- search -->
-
             <div class="join">
                 <div>
                     <label class="input validator join-item">
-                        <input type="text" placeholder="search" class="focus:outline-0" required />
+                        <input id="searchInput" type="text" placeholder="search" class="focus:outline-0" required />
                     </label>
-                    <div class="validator-hint hidden">Enter valid email address</div>
                 </div>
-                <button class="btn btn-primary join-item">Search</button>
+                <button id="searchBtn" onclick="searchBtn()" class="btn btn-primary join-item">Search</button>
             </div>
-
         </section>
     </header>
     <!-- ------------------- -->
 
     <!-- active Bar -->
-    <div id="buttonContainer" class="max-w-7xl flex justify-center md:justify-start mx-auto bg-white p-4 py-5 shadow-md mt-2 space-x-2 lg:mt-12">
+    <div id="buttonContainer"
+        class="max-w-7xl flex justify-center md:justify-start mx-auto bg-white p-4 py-5 shadow-md mt-2 space-x-2 lg:mt-12">
         <button class="btn-nav btn btn-primary">All</button>
         <button class="btn-nav btn">Open</button>
         <button class="btn-nav btn">Closed</button>
@@ -43,7 +41,8 @@
 
     <!-- issues section -->
     <section class="max-w-7xl mx-auto md:mt-5 bg-white">
-        <div class="md:flex space-y-5 md:space-y-0  justify-between items-center py-5 bg-white p-5  border-b border-gray-200">
+        <div
+            class="md:flex space-y-5 md:space-y-0  justify-between items-center py-5 bg-white p-5  border-b border-gray-200">
             <div class="flex gap-3 items-center">
                 <div>
                     <img src="/assests/Aperture.png" alt="">
@@ -55,16 +54,12 @@
             </div>
             <div class="flex items-center gap-5">
                 <div class="flex items-center gap-1">
-                    <div>
-                        <p class="p-2 rounded-full bg-green-800 inline-block"></p>
-                    </div>
+                    <p class="p-2 rounded-full bg-green-800 inline-block"></p>
                     <p>Open</p>
                 </div>
                 <div class="flex items-center gap-1">
-                    <div>
-                        <p class="p-2 rounded-full bg-purple-900 inline-block"></p>
-                    </div>
-                    <p>Open</p>
+                    <p class="p-2 rounded-full bg-purple-900 inline-block"></p>
+                    <p>Closed</p>
                 </div>
             </div>
         </div>
@@ -74,17 +69,12 @@
         <span class="loading loading-bars loading-xl"></span>
     </section>
 
+
     <!-- modal -->
-
-
-    <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
-        
-        
-    </dialog>
+    <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle"> </dialog>
 
     <!-- card section -->
     <section id="issueContainer" class="mt-5 grid lg:grid-cols-3 p-4 mx-auto max-w-7xl bg-white">
-
     </section>
 
     <script src="/script/script.js"></script>

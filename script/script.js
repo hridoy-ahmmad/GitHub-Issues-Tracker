@@ -58,7 +58,6 @@ const filteredIssuesByStarus = (status) => {
 
 
 let totalCount = document.getElementById('totalCount')
-
 const counter = (status) => {
     let count = 0
     if (status === 'all') {
@@ -68,8 +67,6 @@ const counter = (status) => {
     }
     totalCount.innerText = count
 }
-
-
 
 
 // display Data
@@ -118,7 +115,7 @@ const displayIssue = (issues) => {
                 : 'bg-orange-50 text-orange-600'
             }
                             ">
-                            ${issue.labels[1] === undefined ? '-' : issue.labels[1]}
+                            ${issue.labels[1] ? issue.labels[1] : ''}
                         </span>
                     </div>
                 </div>
@@ -126,8 +123,8 @@ const displayIssue = (issues) => {
                 <div class="px-5 py-4 border-t border-gray-100 bg-white">
                     <div class="text-slate-500 text-sm space-y-1">
                         <p># ${issue.id} by <span class="hover:underline cursor-pointer">${issue.author}</span></p>
-                        <p> createdAt:  ${issue.createdAt}</p>
-                        <p> updatedAt:  ${issue.updatedAt}</p>
+                        <p> createdAt:  ${new Date(issue.createdAt).toLocaleDateString()}</p>
+                        <p> updatedAt:  ${new Date(issue.createdAt).toLocaleDateString()}</p>
                     </div>
                 </div>
             </div>
@@ -154,10 +151,10 @@ const loadModals = async (issueId) => {
 const displayModals = (issue) => {
     const newDiv = document.createElement('div')
     my_modal_5.innerHTML = ''
-   
+
     newDiv.innerHTML = ` 
     <div class="modal-box max-w-3xl">
-            <div class="bg-white rounded-xl  w-full p-8 relative">
+            <div class="bg-white rounded-xl  w-full p-8 ">
                 <h2 class="text-3xl font-bold text-slate-800 mb-2">Fix broken image uploads</h2>
                 <div class="flex items-center gap-3 mb-6">
                     <span
@@ -168,7 +165,7 @@ const displayModals = (issue) => {
                         ${issue.status}
                     </span>
                     <span class="text-slate-400 text-sm italic">
-                        • Opened by <span class="font-semibold text-slate-500"> ${issue.author} </span> • ${issue.createdAt}
+                        ~ Opened by <span class="font-semibold text-slate-500"> ${issue.author} </span> ~ ${new Date(issue.createdAt).toLocaleDateString()}
                     </span>
                 </div>
 
@@ -219,3 +216,25 @@ const displayModals = (issue) => {
     `
     my_modal_5.append(newDiv)
 }
+
+
+
+// search
+
+
+// const loadSearch = async (searchText) => {
+//     try {
+//         const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchText}`)
+//         const data = await res.json()
+//         searchBtn(data)
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+// const searchBtn = (searches) => {
+//     const input = document.getElementById('searchInput')
+//     const inputValue = input.value
+//     const filter = allIssues.filter(data => data.searches == inputValue)
+
+
+// }
