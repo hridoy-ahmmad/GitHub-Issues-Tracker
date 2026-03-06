@@ -2,7 +2,9 @@
 
 const buttonContainer = document.getElementById('buttonContainer')
 
+// active Button
 buttonContainer.addEventListener('click', (e) => {
+    console.log(e);
 
     if (e.target.localName === 'button') {
         const buttons = document.querySelectorAll('.btn-nav')
@@ -11,6 +13,71 @@ buttonContainer.addEventListener('click', (e) => {
         })
         e.target.classList.add('btn-primary')
     }
-
-
 })
+
+
+// load all-Data
+const loadAllissue = async () => {
+    try {
+        const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues')
+        const data = await res.json()
+        displayIssue(data.data);
+    } catch (error) {
+        console.log(error);
+    }
+}
+loadAllissue()
+// display Data
+const displayIssue = (issues) => {
+    const issueContainer = document.getElementById('issueContainer')
+
+    issues.forEach(issue => {
+        const newDiv = document.createElement('div')
+        newDiv.innerHTML = `
+        <div class="max-w-sm bg-white border-0 border-t-4  rounded-xl shadow-sm overflow-hidden w-full ${issue.status === "open" ? 'border-green-500' : 'border-red-600'} ">
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                        ${issue.status === 'open' ? '<img  src="/assests/Open-Status.png" alt="">' : '<img  src="/assests/Closed- Status .png" alt="">'}
+                            
+                        </div>
+                        <span
+                            class="px-5 py-1   text-xs font-bold tracking-widest rounded-full uppercase
+                             ${issue.priority === "high" ? 'bg-red-100 text-red-600' : 'text-[#F59E0B] bg-amber-100'}"
+                            >
+
+                            ${issue.priority}
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 leading-tight mb-2">
+                        Fix Navigation Menu On Mobile Devices
+                    </h3>
+
+                    <p class="text-slate-500 text-sm mb-5">
+                        The navigation menu doesn't collapse properly on mobile devices...
+                    </p>
+
+                    <div class="flex gap-2 mb-4">
+                        <span
+                            class="inline-flex items-center gap-1 px-3 py-1 bg-red-50 border border-red-100 text-red-500 text-sm font-medium rounded-full">
+                            BUG
+                        </span>
+                        <span
+                            class="inline-flex items-center gap-1 px-3 py-1 bg-orange-50 border border-orange-100 text-orange-600 text-sm font-medium rounded-full">
+                            HELP WANTED
+                        </span>
+                    </div>
+                </div>
+
+                <div class="px-5 py-4 border-t border-gray-100 bg-white">
+                    <div class="text-slate-500 text-sm space-y-1">
+                        <p>#1 by <span class="hover:underline cursor-pointer">john_doe</span></p>
+                        <p>1/15/2024</p>
+                    </div>
+                </div>
+            </div>
+        `
+        issueContainer.appendChild(newDiv)
+    })
+
+}
