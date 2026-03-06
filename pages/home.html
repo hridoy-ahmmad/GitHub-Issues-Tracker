@@ -49,7 +49,7 @@
                     <img src="/assests/Aperture.png" alt="">
                 </div>
                 <div>
-                    <h1 class="font-bold"><span>50</span> Issues </h1>
+                    <h1 class="font-bold"><span id="totalCount">50</span> Issues </h1>
                     <p class="text-gray-500">Track and manage your project issues</p>
                 </div>
             </div>
@@ -68,8 +68,11 @@
                 </div>
             </div>
         </div>
-
     </section>
+    <!-- Loading -->
+         <section id="loading" class="flex justify-center mx-auto my-10 hidden">
+            <span class="loading loading-bars loading-xl"></span>
+         </section>
     <!-- card section -->
     <section id="issueContainer" class="mt-5 grid grid-cols-3 p-4 mx-auto max-w-7xl bg-white">
         <div class="max-w-sm bg-white border-0 border-t-4 border-red-600 rounded-xl shadow-sm overflow-hidden hidden">

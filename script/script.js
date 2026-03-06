@@ -1,7 +1,17 @@
 
 
-const buttonContainer = document.getElementById('buttonContainer')
+const loading = document.getElementById('loading')
 
+const loadingOn = () => {
+    loading.classList.remove('hidden')
+}
+const loadingOff = () => {
+    loading.classList.add('hidden')
+}
+
+
+
+const buttonContainer = document.getElementById('buttonContainer')
 // active Button
 buttonContainer.addEventListener('click', (e) => {
     console.log(e);
@@ -12,24 +22,60 @@ buttonContainer.addEventListener('click', (e) => {
             btn.classList.remove('btn-primary')
         })
         e.target.classList.add('btn-primary')
+
+        const btnText = e.target.textContent.toLowerCase();
+        filteredIssuesByStarus(btnText)
+        counter(btnText)
     }
 })
 
-
+let allIssues = []
 // load all-Data
+
 const loadAllissue = async () => {
     try {
+        loadingOn()
         const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues')
         const data = await res.json()
-        displayIssue(data.data);
+        allIssues = data.data
+        displayIssue(allIssues);
     } catch (error) {
         console.log(error);
     }
+    console.log(allIssues.length);
 }
 loadAllissue()
+
+
+const filteredIssuesByStarus = (status) => {
+    if (status === 'all') {
+        displayIssue(allIssues)
+    } else {
+        const filteredIssues = allIssues.filter(issue => issue.status === status)
+        displayIssue(filteredIssues)
+    }
+}
+
+
+let totalCount = document.getElementById('totalCount')
+
+const counter = (status) => {
+    let count = 0
+    if (status === 'all') {
+        count = allIssues.length
+    } else {
+        count = allIssues.filter(issue => issue.status === status).length
+    }
+    totalCount.innerText = count
+}
+
+
+
+
 // display Data
 const displayIssue = (issues) => {
     const issueContainer = document.getElementById('issueContainer')
+    issueContainer.innerHTML = ''
 
     issues.forEach(issue => {
         const newDiv = document.createElement('div')
@@ -59,17 +105,17 @@ const displayIssue = (issues) => {
                     <div class="flex gap-2 mb-4">
                         <span
                             class="inline-flex items-center gap-1 px-3 py-1  border border-red-100  text-sm font-medium rounded-full
-                            ${issue.labels[0]=== 'enhancement' ? 'bg-green-50 text-green-500' 
-                                :'bg-red-50 text-red-500'
-                            }
+                            ${issue.labels[0] === 'enhancement' ? 'bg-green-50 text-green-500'
+                : 'bg-red-50 text-red-500'
+            }
                             ">
                             ${issue.labels[0]}
                         </span>
                         <span
                             class="inline-flex items-center gap-1 px-3 py-1 border border-orange-100  text-sm font-medium rounded-full
-                             ${issue.labels[1]=== 'enhancement' ? 'bg-green-50 text-green-500' 
-                                :'bg-orange-50 text-orange-600'
-                            }
+                             ${issue.labels[1] === 'enhancement' ? 'bg-green-50 text-green-500'
+                : 'bg-orange-50 text-orange-600'
+            }
                             ">
                             ${issue.labels[1] === undefined ? '-' : issue.labels[1]}
                         </span>
@@ -79,12 +125,13 @@ const displayIssue = (issues) => {
                 <div class="px-5 py-4 border-t border-gray-100 bg-white">
                     <div class="text-slate-500 text-sm space-y-1">
                         <p># ${issue.id} by <span class="hover:underline cursor-pointer">${issue.author}</span></p>
-                        <p>${issue.createdAt}</p>
+                        <p> createdAt:  ${issue.createdAt}</p>
+                        <p> updatedAt:  ${issue.updatedAt}</p>
                     </div>
                 </div>
             </div>
         `
         issueContainer.appendChild(newDiv)
     })
-
+    loadingOff()
 }
