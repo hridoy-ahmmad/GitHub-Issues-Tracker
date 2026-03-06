@@ -1,11 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>Document</title>
 </head>
-<body>
-    this is home page
+
+<body class="bg-gray-100 min-h-screen">
+    <header class="bg-white">
+        <section class="max-w-11/12 mx-auto flex justify-between py-6 ">
+            <a href="/pages/home.html" class="flex items-center gap-1">
+                <img src="/assests/github-logo.png" class="w-9" alt="">
+                <p class="font-bold">GitHub Issues Tracker</p>
+            </a>
+
+            <!-- search -->
+
+            <div class="join">
+                <div>
+                    <label class="input validator join-item">
+                        <input type="text" placeholder="search" class="focus:outline-0" required />
+                    </label>
+                    <div class="validator-hint hidden">Enter valid email address</div>
+                </div>
+                <button class="btn btn-primary join-item">Search</button>
+            </div>
+
+        </section>
+    </header>
+    <script src="/script/script.js"></script>
 </body>
+
 </html>
