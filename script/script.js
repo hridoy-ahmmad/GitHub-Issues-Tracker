@@ -80,7 +80,7 @@ const displayIssue = (issues) => {
     issues.forEach(issue => {
         const newDiv = document.createElement('div')
         newDiv.innerHTML = `
-        <div class="max-w-sm bg-white border-0 border-t-4  rounded-xl shadow-sm overflow-hidden w-full ${issue.status === "open" ? 'border-green-500' : 'border-purple-600'} ">
+        <div onclick ="loadModals(${issue.id})" class="max-w-sm bg-white border-0 border-t-4 mt-3 h-full flex flex-col justify-between rounded-xl shadow-sm overflow-hidden w-full ${issue.status === "open" ? 'border-green-500' : 'border-purple-600'} ">
                 <div class="p-5">
                     <div class="flex justify-between items-start mb-4">
                         <div>
@@ -104,7 +104,7 @@ const displayIssue = (issues) => {
 
                     <div class="flex gap-2 mb-4">
                         <span
-                            class="inline-flex items-center gap-1 px-3 py-1  border border-red-100  text-sm font-medium rounded-full
+                            class="inline-flex items-center gap-1 px-3 py-1  border border-red-100  text-sm font-medium rounded-full uppercase
                             ${issue.labels[0] === 'enhancement' ? 'bg-green-50 text-green-500'
                 : 'bg-red-50 text-red-500'
             }
@@ -112,7 +112,7 @@ const displayIssue = (issues) => {
                             ${issue.labels[0]}
                         </span>
                         <span
-                            class="inline-flex items-center gap-1 px-3 py-1 border border-orange-100  text-sm font-medium rounded-full
+                            class="inline-flex items-center gap-1 px-3 py-1 border border-orange-100  text-sm font-medium uppercase rounded-full
                              ${issue.labels[1] === 'enhancement' ? 'bg-green-50 text-green-500'
                 : 'bg-orange-50 text-orange-600'
             }
@@ -134,4 +134,92 @@ const displayIssue = (issues) => {
         issueContainer.appendChild(newDiv)
     })
     loadingOff()
+}
+
+
+// Modals
+const my_modal_5 = document.getElementById('my_modal_5')
+const loadModals = async (issueId) => {
+    try {
+        const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${issueId}`)
+        const data = await res.json()
+        displayModals(data.data);
+    } catch (error) {
+        console.log(error);
+    }
+    my_modal_5.showModal()
+}
+
+const displayModals = (issue) => {
+
+    my_modal_5.innerHTML = ` 
+    
+    <div class="modal-box max-w-3xl">
+            <div class="bg-white rounded-xl  w-full p-8 relative">
+                <h2 class="text-3xl font-bold text-slate-800 mb-2">Fix broken image uploads</h2>
+                <div class="flex items-center gap-3 mb-6">
+                    <span
+                        class=" text-white px-3 py-1 rounded-full text-sm font-medium flex items-center gap-1
+                        ${issue.status === "open"? 'bg-green-500': 'bg-red-500'}
+                        
+                        ">
+                        ${issue.status}
+                    </span>
+                    <span class="text-slate-400 text-sm italic">
+                        • Opened by <span class="font-semibold text-slate-500"> ${issue.author} </span> • ${issue.createdAt}
+                    </span>
+                </div>
+
+                <div class="flex gap-2 mb-8">
+                    <p
+                        class="bg-red-50 text-red-400 border border-red-100 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1 
+                         ${issue.labels[0] === 'ENHANCEMENT' ? 'bg-green-50 text-green-500'
+                : 'bg-red-50 text-red-500'
+            }
+                        ">
+                        ${issue.labels[0]}
+                    </p>
+                    <span
+                        class="bg-amber-50 text-amber-500 border border-amber-100 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1
+                        ${issue.labels[1] === 'enhancement' ? 'bg-green-50 text-green-500'
+                : 'bg-orange-50 text-orange-600'
+            }
+                        
+                        ">
+                       ${issue.labels[1] === undefined ? '-' : issue.labels[1]}
+                    </span>
+                </div>
+
+                <p class="text-slate-500 text-lg leading-relaxed mb-10">
+                    The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive
+                    behavior.
+                </p>
+
+                <div class="bg-slate-50 rounded-xl p-6 flex justify-between items-center mb-10">
+                    <div>
+                        <p class="text-slate-400 text-sm mb-1">Assignee: </p>
+                        <p class="text-slate-800 font-bold text-lg">${issue.author}</p>
+                    </div>
+                    <div class="text-center ">
+                        <p class="text-slate-400 text-sm mb-1">Priority:</p>
+                        <p class=" mt-1 px-5 py-1.5 rounded-sm text-sm font-bold
+                         ${issue.priority === "high" ? 'bg-red-100 text-red-600' : 'text-[#e08f03] bg-amber-100'}
+                        ">
+                           ${issue.priority}
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <form method="dialog " class="flex justify-end">
+                <!-- if there is a button in form, it will close the modal -->
+                <button class="btn btn-primary">Close</button>
+            </form>
+        </div>
+    
+    `
+
+
+
 }
