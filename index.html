@@ -9,8 +9,51 @@
     <title>Document</title>
 </head>
 
-<body>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white w-full max-w-md p-8 rounded-xl shadow-lg">
 
+        <!-- Logo -->
+        <div class="flex justify-center mb-4">
+            <img src="assests/github-logo.png" alt="">
+        </div>
+
+        <!-- Title -->
+        <h1 class="text-2xl font-bold text-center">GitHub Issues Tracker</h1>
+        <p class="text-center text-gray-500 mb-6">Sign in to manage your issues</p>
+
+        <!-- Username -->
+        <label class="font-medium">Username</label>
+        <input id="userName" type="text" placeholder="Enter Username"
+            class="w-full mt-2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+
+        <!-- Password -->
+        <label class="font-medium mt-4 block">Password</label>
+        <input id="password" type="password" placeholder="Enter Password"
+            class="w-full mt-2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+
+
+        <!-- Button -->
+        <button onclick="btnSubmit()" class="w-full mt-6 py-3 rounded-lg text-white font-semibold 
+    bg-gradient-to-r from-purple-600 to-indigo-600 hover:opacity-90">
+            Sign In
+        </button>
+
+        <!-- OR -->
+        <div class="flex items-center gap-3 my-6">
+            <hr class="flex-1 border-gray-300">
+            <span class="text-gray-500">OR</span>
+            <hr class="flex-1 border-gray-300">
+        </div>
+
+        <!-- userName & password -->
+        <div class="bg-gray-100 p-4 rounded-lg text-center">
+            <p><span class="font-semibold">Username:</span> admin</p>
+            <p><span class="font-semibold">Password:</span> admin123</p>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
