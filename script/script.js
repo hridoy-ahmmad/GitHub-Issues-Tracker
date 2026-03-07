@@ -111,12 +111,11 @@ const displayIssue = (issues) => {
                             ${issue.labels[0]}
                         </span>
                         <span
-                            class="inline-flex items-center gap-1 px-3 py-1 border border-orange-100  text-sm font-medium uppercase rounded-full
+                            class="inline-flex items-center gap-1 px-3 py-1  text-sm font-medium uppercase rounded-full
                              ${issue.labels[1] === 'enhancement' ? 'bg-green-50 text-green-500'
-                : 'bg-orange-50 text-orange-600'
-            }
-                            ">
-                            ${issue.labels[1] ? issue.labels[1] : 'no data found'}
+                : ' text-orange-600'} ${issue.labels[1] ? 'border border-orange-100 bg-orange-50' : 'border-none'
+            } ">
+                            ${issue.labels[1] ? issue.labels[1] : ''}
                         </span>
                     </div>
                 </div>
@@ -236,7 +235,7 @@ const handleSearch = async () => {
 
     } catch (error) {
         console.log(error);
-    } 
+    }
     loadingOff()
 
 }
