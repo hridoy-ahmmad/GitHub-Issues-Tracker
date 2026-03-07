@@ -9,7 +9,7 @@ const btnSubmit = () => {
 
     if (inputUserName === 'admin' && inputPassword === 'admin123') {
         window.location.assign('/pages/home.html')
-        alert('Login Successful')
+        
     } else {
         alert('Wrong Credentials')
     }

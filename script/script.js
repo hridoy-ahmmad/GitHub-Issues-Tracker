@@ -219,22 +219,25 @@ const displayModals = (issue) => {
 
 
 
-// search
 
 
-// const loadSearch = async (searchText) => {
-//     try {
-//         const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchText}`)
-//         const data = await res.json()
-//         searchBtn(data)
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
-// const searchBtn = (searches) => {
-//     const input = document.getElementById('searchInput')
-//     const inputValue = input.value
-//     const filter = allIssues.filter(data => data.searches == inputValue)
+const handleSearch = async () => {
+    const searchInput = document.getElementById('searchInput')
+    const searchInputValue = searchInput.value.trim()
+    if (searchInputValue === '') {
+        displayIssue(allIssues)
+        counter('all')
+        return
+    }
 
+    try {
+        const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchInputValue}`)
+        const data = await res.json()
+        displayIssue(data.data);
+        totalCount.innerText = data.data.length;
+    } catch (error) {
+        console.log(error);
 
-// }
+    }
+
+}
