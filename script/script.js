@@ -116,7 +116,7 @@ const displayIssue = (issues) => {
                 : 'bg-orange-50 text-orange-600'
             }
                             ">
-                            ${issue.labels[1] ? issue.labels[1] : ''}
+                            ${issue.labels[1] ? issue.labels[1] : 'no data found'}
                         </span>
                     </div>
                 </div>
