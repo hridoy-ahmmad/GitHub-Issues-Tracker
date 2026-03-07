@@ -229,14 +229,16 @@ const handleSearch = async () => {
     }
 
     try {
+        loadingOn()
         const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchInputValue}`)
         const data = await res.json()
         displayIssue(data.data);
         totalCount.innerText = data.data.length;
+
     } catch (error) {
         console.log(error);
-
-    }
+    } 
+    loadingOff()
 
 }
 
