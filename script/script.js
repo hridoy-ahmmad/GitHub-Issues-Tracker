@@ -125,7 +125,6 @@ const displayIssue = (issues) => {
                     <div class="text-slate-500 text-sm space-y-1">
                         <p># ${issue.id} by <span class="hover:underline cursor-pointer">${issue.author}</span></p>
                         <p> createdAt:  ${new Date(issue.createdAt).toLocaleDateString()}</p>
-                        <p> updatedAt:  ${new Date(issue.createdAt).toLocaleDateString()}</p>
                     </div>
                 </div>
             </div>
