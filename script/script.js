@@ -1,6 +1,8 @@
-
-
+const issueContainer = document.getElementById('issueContainer')
+const buttonContainer = document.getElementById('buttonContainer')
 const loading = document.getElementById('loading')
+const my_modal_5 = document.getElementById('my_modal_5')
+const searchInput = document.getElementById('searchInput')
 
 const loadingOn = () => {
     loading.classList.remove('hidden')
@@ -11,7 +13,6 @@ const loadingOff = () => {
 
 
 
-const buttonContainer = document.getElementById('buttonContainer')
 // active Button
 buttonContainer.addEventListener('click', (e) => {
     console.log(e);
@@ -71,7 +72,7 @@ const counter = (status) => {
 
 // display Data
 const displayIssue = (issues) => {
-    const issueContainer = document.getElementById('issueContainer')
+
     issueContainer.innerHTML = ''
 
     issues.forEach(issue => {
@@ -136,7 +137,7 @@ const displayIssue = (issues) => {
 
 
 // Modals
-const my_modal_5 = document.getElementById('my_modal_5')
+
 const loadModals = async (issueId) => {
     try {
         const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${issueId}`)
@@ -219,10 +220,7 @@ const displayModals = (issue) => {
 
 
 
-
-
 const handleSearch = async () => {
-    const searchInput = document.getElementById('searchInput')
     const searchInputValue = searchInput.value.trim()
     if (searchInputValue === '') {
         displayIssue(allIssues)
@@ -241,3 +239,10 @@ const handleSearch = async () => {
     }
 
 }
+
+searchInput.addEventListener('keypress', (e) => {
+    console.log(e);
+    if (e.key === 'Enter') {
+        handleSearch()
+    }
+})
